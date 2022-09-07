@@ -1,4 +1,4 @@
-import 'package:threebotlogin/helpers/environment.dart';
+import 'package:app/helpers/environment.dart';
 
 abstract class EnvConfig {
   Environment environment = Environment.Local;

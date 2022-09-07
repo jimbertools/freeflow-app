@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:app/app.dart';
-// import 'package:threebotlogin/apps/wallet/wallet.dart';
-// import 'package:threebotlogin/screens/planetary_network_screen.dart';
+// import 'package:app/apps/wallet/wallet.dart';
+// import 'package:app/screens/planetary_network_screen.dart';
 
 // import 'apps/farmers/farmers.dart';
 // import 'apps/news/news.dart';

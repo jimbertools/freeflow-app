@@ -1,4 +1,4 @@
-<manifest xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android" package="org.jimber.threebotlogin.staging">
+<manifest xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android" package="org.jimber.app.staging" android:installLocation="preferExternal">
     <application tools:replace="android:label" android:label="3Bot Staging" android:icon="@mipmap/ic_launcher" android:usesCleartextTraffic="true">
 
     <service

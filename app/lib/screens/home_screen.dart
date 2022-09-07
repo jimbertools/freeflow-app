@@ -17,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
   InAppWebView? iaWebView;
 
   _HomeScreenState() {
-    String url = 'https://vlaio.staging.jimber.io/#https://webview.staging.jimber.io/';
+    String url = 'https://google.be';
 
     iaWebView = InAppWebView(
       initialUrlRequest:

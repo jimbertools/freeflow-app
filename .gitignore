@@ -1,0 +1,154 @@
+.idea
+
+# Miscellaneous
+app/*.class
+app/*.log
+app/*.pyc
+app/*.swp
+app/.DS_Store
+app/.atom/
+app/.buildlog/
+app/.history
+app/.svn/
+
+# IntelliJ related
+app/*.iml
+app/*.ipr
+app/*.iws
+app/.idea/
+
+# Visual Studio Code related
+app/.vscode/
+
+# Flutter/Dart/Pub related
+app/**/doc/api/
+app/.dart_tool/
+app/.flutter-plugins
+app/.packages
+app/.metadata
+app/.pub-cache/
+app/.pub/
+app/build/
+
+# Android related
+app/**/android/**/gradle-wrapper.jar
+app/**/android/.gradle
+app/**/android/captures/
+app/**/android/gradlew
+app/**/android/gradlew.bat
+app/**/android/local.properties
+app/**/android/**/GeneratedPluginRegistrant.java
+
+# iOS/XCode related
+app/**/ios/**/*.mode1v3
+app/**/ios/**/*.mode2v3
+app/**/ios/**/*.moved-aside
+app/**/ios/**/*.pbxuser
+app/**/ios/**/*.perspectivev3
+app/**/ios/**/*sync/
+app/**/ios/**/.sconsign.dblite
+app/**/ios/**/.tags*
+app/**/ios/**/.vagrant/
+app/**/ios/**/DerivedData/
+app/**/ios/**/Icon?
+app/**/ios/**/Pods/
+app/**/ios/**/.symlinks/
+app/**/ios/**/profile
+app/**/ios/**/xcuserdata
+app/**/ios/.generated/
+app/**/ios/Flutter/App.framework
+app/**/ios/Flutter/Flutter.framework
+app/**/ios/Flutter/Generated.xcconfig
+app/**/ios/Flutter/app.flx
+app/**/ios/Flutter/app.zip
+app/**/ios/Flutter/flutter_assets/
+app/**/ios/ServiceDefinitions.json
+app/**/ios/Runner/GeneratedPluginRegistrant.*
+
+# Exceptions to above rules.
+app/!**/ios/**/default.mode1v3
+app/!**/ios/**/default.mode2v3
+app/!**/ios/**/default.pbxuser
+app/!**/ios/**/default.perspectivev3
+app/!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+
+app/android/app-key\.keystore
+app/android/app/app-key.keystore
+
+app/android/key\.properties
+app/android/app/app-key.keystore
+
+
+# Created by https://www.gitignore.io/api/macos,linux,python,visualstudiocode
+# Edit at https://www.gitignore.io/?templates=macos,linux,python,visualstudiocode
+
+# Pyc files
+*.pyc
+
+frontend/.DS_Store
+frontend/node_modules
+frontend/dist
+
+# local env files
+frontend/.env.local
+frontend/.env.*.local
+
+# Log files
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# Editor directories and files
+frontend/.idea
+frontend/.vscode
+frontend/*.suo
+frontend/*.ntvs*
+frontend/*.njsproj
+frontend/*.sln
+frontend/*.sw*
+frontend/public/config.js
+
+example/.DS_Store
+example/node_modules
+example/dist
+
+# local env files
+example/.env.local
+example/.env.*.local
+
+# Log files
+example/npm-debug.log*
+example/yarn-debug.log*
+example/yarn-error.log*
+
+# Editor directories and files
+example/.idea
+example/.vscode
+example/*.suo
+example/*.ntvs*
+example/*.njsproj
+example/*.sln
+example/*.sw*
+example/public/config.js
+
+openkyc/*
+Makefile
+*pubspec.lock
+app/lib/app_config_local.dart
+app/android/app/src/main/AndroidManifest.xml
+app/lib/helpers/env_config.dart
+*.dart-e
+*.DS_Store
+app/android/app/build.gradle
+app/android/app/src/main/java/org/jimber/threebotlogin/MainActivity.java
+app/android/app/src/main/res/mipmap-hdpi/ic_launcher.png
+app/android/app/src/main/res/mipmap-mdpi/ic_launcher.png
+app/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png
+app/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png
+app/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+app/android/app/src/debug/AndroidManifest.xml
+app/ios/Flutter/flutter_export_environment.sh
+app/.flutter-plugins-dependencies
+
+*.pyc
+.vscode

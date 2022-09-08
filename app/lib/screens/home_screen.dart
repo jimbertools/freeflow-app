@@ -4,6 +4,8 @@ import 'package:app/services/location_service.dart';
 import 'package:app/services/picture_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 bool created = false;
 
@@ -17,13 +19,15 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
   InAppWebView? iaWebView;
 
   _HomeScreenState() {
-    String url = 'baerttest.digitaltwin-test.jimbertesting.be';
+    String url = 'baertie.demo.freeflow.life';
 
     iaWebView = InAppWebView(
       initialUrlRequest:
           URLRequest(url: Uri.parse(url)),
       initialOptions: InAppWebViewGroupOptions(
-          crossPlatform: InAppWebViewOptions(),
+          crossPlatform: InAppWebViewOptions(
+            useShouldOverrideUrlLoading: true,
+          ),
           android: AndroidInAppWebViewOptions(supportMultipleWindows: true, thirdPartyCookiesEnabled: true),
           ios: IOSInAppWebViewOptions()),
       onWebViewCreated: (InAppWebViewController controller) async {
@@ -37,13 +41,29 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
       onConsoleMessage: (InAppWebViewController controller, ConsoleMessage consoleMessage) {
         print("Console: " + consoleMessage.message);
       },
+      shouldOverrideUrlLoading: (controller, navigationAction) async{
+        final uri = navigationAction.request.url;
+        print('uri:' + uri.toString());
+        if(uri.toString().startsWith('threebot://login?')){
+          _launchUrl(uri);
+          return NavigationActionPolicy.CANCEL;
+        }
+        return NavigationActionPolicy.ALLOW;
+        },
       onLoadStop: (controller, url) {},
+
     );
   }
 
   @override
   void dispose() {
     super.dispose();
+  }
+
+  Future<void> _launchUrl(url) async {
+    if (!await launchUrl(url)) {
+      print('Could not launch app');
+    }
   }
 
   clearDataHandler(List<dynamic> params) async {

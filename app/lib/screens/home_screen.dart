@@ -17,11 +17,11 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
   InAppWebView? iaWebView;
 
   _HomeScreenState() {
-    String url = 'https://google.be';
+    String url = 'baerttest.digitaltwin-test.jimbertesting.be';
 
     iaWebView = InAppWebView(
       initialUrlRequest:
-          URLRequest(url: Uri.parse(url + '?cache_buster=' + new DateTime.now().millisecondsSinceEpoch.toString())),
+          URLRequest(url: Uri.parse(url)),
       initialOptions: InAppWebViewGroupOptions(
           crossPlatform: InAppWebViewOptions(),
           android: AndroidInAppWebViewOptions(supportMultipleWindows: true, thirdPartyCookiesEnabled: true),

@@ -49,7 +49,7 @@ class _UserScreenState extends State<UserScreen> {
                             if (form != null && form.validate()) {
                               form.save();
                               print('huts');
-                              print(user.username);
+
 
                               await Navigator.push(
                                 context,

@@ -29,8 +29,7 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
 
   _HomeScreenState() {
     String url = '.demo.freeflow.life';
-    print("hallo");
-    String webviewUrl = widget.user.username.toString() + url;
+    dynamic webviewUrl = widget;
     print(webviewUrl);
 
 

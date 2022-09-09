@@ -1,4 +1,4 @@
-import 'package:app/screens/home_screen.dart';
+import 'package:app/screens/enter_username_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -30,6 +30,28 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     appBar: AppBar(
+  //       title: Text(widget.title),
+  //     ),
+  //     body: Center(
+  //       child: Column(
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children: <Widget>[
+  //           ElevatedButton(onPressed: () async {
+  //             await Navigator.push(
+  //                 context,
+  //                 MaterialPageRoute(
+  //                     builder: (context) => HomeScreen()));
+  //           }, child: Text('Go to webview'))
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,8 +66,18 @@ class _MyHomePageState extends State<MyHomePage> {
               await Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => HomeScreen()));
-            }, child: Text('Go to webview'))
+                      builder: (context) => UserScreen()));
+              },
+                child: Text('Login on your hosted environment')
+            ),
+            ElevatedButton(onPressed: () async {
+              await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => UserScreen()));
+            },
+                child: Text('Login to Freeflow on our environment')
+            ),
           ],
         ),
       ),

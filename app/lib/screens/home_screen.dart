@@ -5,11 +5,13 @@ import 'package:app/services/picture_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-
-bool created = false;
+import 'package:app/models/user.dart';
 
 class HomeScreen extends StatefulWidget {
+  final User user;
+
+  HomeScreen({required this.user});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -17,13 +19,24 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMixin {
   InAppWebViewController? webView;
   InAppWebView? iaWebView;
+  String? username;
+
+  @override
+  void initState() {
+    username = widget.user.username;
+    super.initState();
+  }
 
   _HomeScreenState() {
-    String url = 'baertie.demo.freeflow.life';
+    String url = '.demo.freeflow.life';
+    print("hallo");
+    String webviewUrl = widget.user.username.toString() + url;
+    print(webviewUrl);
+
 
     iaWebView = InAppWebView(
       initialUrlRequest:
-          URLRequest(url: Uri.parse(url)),
+          URLRequest(url: Uri.parse(widget.user.username + url)),
       initialOptions: InAppWebViewGroupOptions(
           crossPlatform: InAppWebViewOptions(
             useShouldOverrideUrlLoading: true,
@@ -50,8 +63,6 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
         }
         return NavigationActionPolicy.ALLOW;
         },
-      onLoadStop: (controller, url) {},
-
     );
   }
 

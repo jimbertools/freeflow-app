@@ -10,14 +10,16 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
+  final TextEditingController usernameController = TextEditingController();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  User user = new User(username: '');
 
   final _formKey = GlobalKey<FormState>();
-  User user = User(username: '');
 
   @override
   Widget build(BuildContext context) {
@@ -29,36 +31,19 @@ class _UserScreenState extends State<UserScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     TextFormField(
-                      decoration: InputDecoration(labelText: 'Username'),
-                      // validator: (String value) {
-                      //   if (value.isEmpty) {
-                      //     return 'Please enter some text';
-                      //   }
-                      //   return null;
-                      // },
-                      onSaved: (value) {
-                        if(value != null) {
-                          print(value);
-                          user.username = value;
-                        }
-                      },
+                      controller: usernameController,
+                      decoration: const InputDecoration(border: OutlineInputBorder()),
                     ),
                     ElevatedButton(
                       onPressed: () async {
-                        final form = _formKey.currentState;
-                            if (form != null && form.validate()) {
-                              form.save();
-                              print('huts');
-
-
-                              await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => HomeScreen(user: user)
-                                )
-                              );
-                            }
-
+                        user.username = usernameController.text;
+                        print(user.username);
+                        await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DetailScreen(user: user)
+                            )
+                        );
                       },
                       child: const Text('Sign in'),
                     ),

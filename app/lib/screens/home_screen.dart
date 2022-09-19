@@ -29,14 +29,14 @@ class _DetailScreenState extends State<DetailScreen> {
                 child: Container(
                   margin: const EdgeInsets.only(top: 50),
                   child: InAppWebView(
-                    initialUrlRequest: URLRequest(url: Uri.parse(widget.user.username + url)),
+                    initialUrlRequest: URLRequest(url: Uri.parse('www.redbull.com')),
                     initialOptions: InAppWebViewGroupOptions(
                         crossPlatform: InAppWebViewOptions(
                           useShouldOverrideUrlLoading: true,
                         ),
-                        android: AndroidInAppWebViewOptions(supportMultipleWindows: true, thirdPartyCookiesEnabled: true),
+                        android: AndroidInAppWebViewOptions(supportMultipleWindows: true, thirdPartyCookiesEnabled: true, useHybridComposition: true),
                         ios: IOSInAppWebViewOptions(
-                          
+
                         )),
                     onWebViewCreated: (InAppWebViewController controller) async{
                       _webViewController = controller;
@@ -53,6 +53,16 @@ class _DetailScreenState extends State<DetailScreen> {
                         return NavigationActionPolicy.CANCEL;
                       }
                       return NavigationActionPolicy.ALLOW;
+                    },
+                    onLoadError: (
+                        controller,
+                        url,
+                        int i,
+                        String s
+                        ) async {
+                      print('CUSTOM_HANDLER: $i, $s, $url');
+                      /** instead of printing the console message i want to render a static page or display static message **/
+
                     },
                     onLoadStop: (controller, url) {},
                   ),

@@ -1,4 +1,4 @@
-package org.jimber.app.staging
+package org.freeflow.staging
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine

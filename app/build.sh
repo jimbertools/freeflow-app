@@ -42,6 +42,8 @@ switchConfigs() {
     cp android/app/src/main/res/mipmap-xxhdpi/ic_launcher_$1.png android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png
     cp android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_$1.png android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
 
+    cp lib/globals/globals_$1 lib/globals/globals.dart
+
     # cp android/app/google-services_$1 android/app/google-services.json
     # cp ios/Runner/GoogleService-Info_$1 ios/Runner/GoogleService-Info.plist
 }

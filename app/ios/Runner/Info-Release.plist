@@ -45,5 +45,7 @@
 	<string>YES</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
+	<key>CFBundleDisplayName</key>
+	<string>Freeflow</string>
 </dict>
 </plist>

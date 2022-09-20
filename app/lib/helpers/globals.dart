@@ -21,26 +21,10 @@ class Globals {
   static final bool isInDebugMode = true;
   static final HexColor color = HexColor("#0a73b8");
 
-  ValueNotifier<bool> emailVerified = ValueNotifier(false);
-  ValueNotifier<bool> phoneVerified = ValueNotifier(false);
-  ValueNotifier<bool> identityVerified = ValueNotifier(false);
 
   final JRouter router = new JRouter();
 
-  int incorrectPincodeAttempts = 0;
-  int sendSmsAttempts = 0;
-  bool tooManyAuthenticationAttempts = false;
-  bool tooManySmsAttempts = false;
-
   String routeName = 'Home';
-  late TabController tabController;
-
-  int lockedUntill = 0;
-  int lockedSmsUntill = 0;
-  int loginTimeout = 120;
-
-  int smsSentOn = 0;
-  int smsMinutesCoolDown = 5;
 
   ValueNotifier<bool> hidePhoneButton = ValueNotifier(false);
 

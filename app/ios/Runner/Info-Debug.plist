@@ -49,6 +49,8 @@
 	<string>YES</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
+	<key>CFBundleDisplayName</key>
+	<string>Freeflow</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

@@ -9,6 +9,8 @@ import 'package:flutter_svg/svg.dart';
 
 import '../helpers/hex_color.dart';
 
+import 'package:app/globals/globals.dart' as globals;
+
 class UserScreen extends StatefulWidget {
   _UserScreenState createState() => _UserScreenState();
 }
@@ -22,7 +24,6 @@ class _UserScreenState extends State<UserScreen> {
   }
 
   User user = new User(username: '');
-  String url = '.demo.freeflow.life';
 
   final _formKey = GlobalKey<FormState>();
 
@@ -120,7 +121,7 @@ class _UserScreenState extends State<UserScreen> {
                                             builder: (context) => DetailScreen(
                                                 url: 'https://' +
                                                     user.username +
-                                                    url)));
+                                                    globals.url)));
                                   },
                                   style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all(

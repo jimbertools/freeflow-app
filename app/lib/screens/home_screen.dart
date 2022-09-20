@@ -1,15 +1,16 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:app/models/user.dart';
 
-import 'enter_username_screen.dart';
+import '../helpers/hex_color.dart';
 
 class DetailScreen extends StatefulWidget {
-  const DetailScreen({Key? key, required this.user}) : super(key: key);
+  const DetailScreen({Key? key, required this.url}) : super(key: key);
 
-  final User user;
+  final String url;
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();
@@ -17,19 +18,25 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreenState extends State<DetailScreen> {
 
   late InAppWebViewController _webViewController;
-  String url = '.demo.freeflow.life';
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        statusBarColor: HexColor('#ffffff'), // <-- SEE HERE
+        statusBarIconBrightness:
+        Brightness.dark, //<-- For Android SEE HERE (dark icons)
+        statusBarBrightness:
+        Brightness.light, //<-- For iOS SEE HERE (dark icons)
+      ),
+      child: Scaffold(
         body: Container(
             child: Column(children: <Widget>[
               Expanded(
                 child: Container(
-                  margin: const EdgeInsets.only(top: 50),
+                  margin: const EdgeInsets.only(top: 30),
                   child: InAppWebView(
-                    initialUrlRequest: URLRequest(url: Uri.parse('www.redbull.com')),
+                    initialUrlRequest: URLRequest(url: Uri.parse(widget.url)),
                     initialOptions: InAppWebViewGroupOptions(
                         crossPlatform: InAppWebViewOptions(
                           useShouldOverrideUrlLoading: true,

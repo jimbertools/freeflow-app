@@ -7,15 +7,15 @@ import 'package:app/models/user.dart';
 
 import '../helpers/hex_color.dart';
 
-class DetailScreen extends StatefulWidget {
-  const DetailScreen({Key? key, required this.url}) : super(key: key);
+class WebviewScreen extends StatefulWidget {
+  const WebviewScreen({Key? key, required this.url}) : super(key: key);
 
   final String url;
 
   @override
-  State<DetailScreen> createState() => _DetailScreenState();
+  State<WebviewScreen> createState() => _WebviewScreenState();
 }
-class _DetailScreenState extends State<DetailScreen> {
+class _WebviewScreenState extends State<WebviewScreen> {
 
   late InAppWebViewController _webViewController;
 

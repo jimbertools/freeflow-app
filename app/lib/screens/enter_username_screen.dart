@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:app/screens/home_screen.dart';
+import 'package:app/screens/webview_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app/models/user.dart';
@@ -118,7 +118,7 @@ class _UserScreenState extends State<UserScreen> {
                                     await Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => DetailScreen(
+                                            builder: (context) => WebviewScreen(
                                                 url: 'https://' +
                                                     user.username +
                                                     globals.url)));

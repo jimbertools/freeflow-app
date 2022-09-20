@@ -1,6 +1,6 @@
-import 'package:app/app_config_local.dart';
-import 'package:app/helpers/env_config.dart';
-import 'package:app/helpers/environment.dart';
+import 'package:freeflow/app_config_local.dart';
+import 'package:freeflow/helpers/env_config.dart';
+import 'package:freeflow/helpers/environment.dart';
 
 import 'helpers/globals.dart';
 

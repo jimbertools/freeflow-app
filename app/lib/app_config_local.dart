@@ -1,4 +1,4 @@
-import 'package:app/app_config.dart';
+import 'package:freeflow/app_config.dart';
 
 class AppConfigLocal extends AppConfigImpl {
 

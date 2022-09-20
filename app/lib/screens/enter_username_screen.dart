@@ -1,15 +1,15 @@
 import 'dart:ui';
 
-import 'package:app/screens/webview_screen.dart';
+import 'package:freeflow/screens/webview_screen.dart';
 import 'package:flutter/material.dart';
 
-import 'package:app/models/user.dart';
+import 'package:freeflow/models/user.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../helpers/hex_color.dart';
 
-import 'package:app/globals/globals.dart' as globals;
+import 'package:freeflow/globals/globals.dart' as globals;
 
 class UserScreen extends StatefulWidget {
   _UserScreenState createState() => _UserScreenState();

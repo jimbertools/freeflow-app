@@ -1,8 +1,8 @@
-import 'package:app/helpers/environment.dart';
+import 'package:freeflow/helpers/environment.dart';
 
 abstract class EnvConfig {
   Environment environment = Environment.Staging;
 
-  String githash = "githashvalue";
-  String time = "timevalue";
+  String githash = "bb8c4f7";
+  String time = "16:21:18 20.09.2022";
 }

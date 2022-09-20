@@ -1,6 +1,6 @@
-import 'package:app/helpers/hex_color.dart';
-import 'package:app/screens/enter_username_screen.dart';
-import 'package:app/screens/enter_environment.dart';
+import 'package:freeflow/helpers/hex_color.dart';
+import 'package:freeflow/screens/enter_username_screen.dart';
+import 'package:freeflow/screens/enter_environment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';

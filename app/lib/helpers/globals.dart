@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:app/helpers/hex_color.dart';
-import 'package:app/jrouter.dart';
+import 'package:freeflow/helpers/hex_color.dart';
+import 'package:freeflow/jrouter.dart';
 
 class NoAnimationTabController extends TabController {
   NoAnimationTabController(

@@ -1,3 +1,3 @@
 library my_prj.globals;
 
-String url = '.demo.freeflow.life';
+String url = '.digitaltwin-test.jimbertesting.be';

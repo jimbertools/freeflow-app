@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:app/screens/webview_screen.dart';
+import 'package:freeflow/screens/webview_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';

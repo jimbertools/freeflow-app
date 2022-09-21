@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:freeflow/models/user.dart';
 
 import '../helpers/hex_color.dart';
+import 'package:freeflow/globals/globals.dart' as globals;
 
 class WebviewScreen extends StatefulWidget {
   const WebviewScreen({Key? key, required this.url}) : super(key: key);
@@ -55,7 +55,7 @@ class _WebviewScreenState extends State<WebviewScreen> {
                     shouldOverrideUrlLoading: (controller, navigationAction) async{
                       final uri = navigationAction.request.url;
                       print('uri:' + uri.toString());
-                      if(uri.toString().startsWith('threebot://login?')){
+                      if(uri.toString().startsWith(globals.deeplink)){
                         _launchUrl(uri);
                         return NavigationActionPolicy.CANCEL;
                       }

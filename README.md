@@ -1,16 +1,41 @@
-# app
+## FreeFlow Mobile Application
 
-POC vlaio
+Mobile app for IOS and Android written in `Flutter` and `Dart` made for `IOS` and `Android`
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+### Development
 
-A few resources to get you started if this is your first Flutter project:
+#### Android
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+`flutter pub get`
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+`./build.sh --init`
+
+`./build.sh --switch [local | staging | production]`
+
+`./build.sh --build [local | staging | production]`
+
+Builds will be available at:
+https://apps.staging.jimber.io/
+
+
+#### IOS
+
+`flutter pub get && cd ios/ && pod install`
+
+Set environment with right parameters (Ask app developers in Jimber)
+
+### References
+
+#### FreeFlow
+
+This app is based on FreeFlow:
+https://github.com/threefoldtech/twin_aydo
+
+#### Android Playstore URL:
+
+TBD
+
+#### IOS Appstore URL: 
+
+TBD

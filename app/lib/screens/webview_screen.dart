@@ -34,7 +34,7 @@ class _WebviewScreenState extends State<WebviewScreen> {
             child: Column(children: <Widget>[
               Expanded(
                 child: Container(
-                  margin: const EdgeInsets.only(top: 30),
+                  padding: const EdgeInsets.only(top: 40),
                   child: InAppWebView(
                     initialUrlRequest: URLRequest(url: Uri.parse(widget.url)),
                     initialOptions: InAppWebViewGroupOptions(

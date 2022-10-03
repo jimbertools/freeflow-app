@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
+import 'package:freeflow/screens/webview_screen.dart';
+import 'package:freeflow/models/user.dart';
+import 'package:freeflow/globals/globals.dart' as globals;
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
@@ -30,6 +34,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final TextEditingController usernameController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  User user = new User(username: '');
+
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
           height: 40,
         ),
       ),
-      body: Container(
+      /*body: Container(
         decoration: new BoxDecoration(color: HexColor('#dacfc7')),
         width: double.infinity,
         child: Column(
@@ -129,7 +144,104 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
         ),
-      ),
+      ),*/
+        body: Container(
+            color: HexColor('#dacfc7'),
+            height: double.infinity,
+            alignment: Alignment.center,
+            child: CustomScrollView(scrollDirection: Axis.vertical, slivers: [
+              SliverFillRemaining(
+                hasScrollBody: false,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Image.asset(
+                      'assets/freeflow_spawner.png',
+                      height: 300,
+                    ),
+                    Container(
+                      child: Column(
+                        children: [
+                          Text(
+                            "WELCOME TO YOUR",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: HexColor('#2c3e50'),
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                          Text(
+                            "FREEFLOW EXPERIENCE",
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: HexColor('#2c3e50'),
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(height: 15),
+                          Text(
+                              "Please enter your ThreeFold Connect username in order to continue.",
+                              style: TextStyle(
+                                color: HexColor('#2c3e50'),
+                              ),
+                              textAlign: TextAlign.center),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      width: 300,
+                      child: Column(
+                        children: [
+                          Form(
+                            key: _formKey,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                TextFormField(
+                                  controller: usernameController,
+                                  decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    isDense: true, // Added this
+                                    contentPadding: EdgeInsets.all(12),
+                                    filled: true,
+                                    fillColor: Color.fromRGBO(227, 219, 213, 1),
+                                  ),
+                                  style: TextStyle(),
+                                ),
+                                TextButton(
+                                  onPressed: () async {
+                                    user.username = usernameController.text;
+                                    print(user.username);
+                                    await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => WebviewScreen(
+                                                url: 'https://' +
+                                                    user.username +
+                                                    globals.url)));
+                                  },
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                        HexColor('#66c9bf')),
+                                    padding:
+                                    MaterialStateProperty.all<EdgeInsets>(
+                                        EdgeInsets.only(top: 5, bottom: 5)),
+                                    minimumSize:
+                                    MaterialStateProperty.all<Size>(
+                                        Size(300, 34.0)),
+                                  ),
+                                  child: const Text('GO!',
+                                      style: TextStyle(color: Colors.white)),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ]))
     );
   }
 }

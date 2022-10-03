@@ -141,11 +141,11 @@ app/lib/helpers/env_config.dart
 *.DS_Store
 app/android/app/build.gradle
 app/android/app/src/main/java/org/jimber/threebotlogin/MainActivity.java
-# app/android/app/src/main/res/mipmap-hdpi/ic_launcher.png
-# app/android/app/src/main/res/mipmap-mdpi/ic_launcher.png
-# app/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png
-# app/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png
-# app/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+app/android/app/src/main/res/mipmap-hdpi/ic_launcher.png
+app/android/app/src/main/res/mipmap-mdpi/ic_launcher.png
+app/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png
+app/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png
+app/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
 app/android/app/src/debug/AndroidManifest.xml
 app/ios/Flutter/flutter_export_environment.sh
 app/.flutter-plugins-dependencies

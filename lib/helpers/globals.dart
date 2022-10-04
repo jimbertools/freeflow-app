@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:freeflow/helpers/hex_color.dart';
-import 'package:freeflow/jrouter.dart';
 
 class NoAnimationTabController extends TabController {
   NoAnimationTabController(
@@ -20,9 +19,6 @@ class NoAnimationTabController extends TabController {
 class Globals {
   static final bool isInDebugMode = true;
   static final HexColor color = HexColor("#0a73b8");
-
-
-  final JRouter router = new JRouter();
 
   String routeName = 'Home';
 

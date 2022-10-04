@@ -114,7 +114,7 @@ class _EnvironmentScreenState extends State<EnvironmentScreen> {
                                     await Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => WebviewScreen(
+                                            builder: (context) => WebViewScreen(
                                                 url: 'https://' + replaced)));
                                   },
                                   style: ButtonStyle(

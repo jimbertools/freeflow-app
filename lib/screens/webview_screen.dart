@@ -2,80 +2,146 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:freeflow/app_config.dart';
+import 'package:freeflow/screens/enter_username_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../globals/globals.dart';
 import '../helpers/hex_color.dart';
-import 'package:freeflow/globals/globals.dart' as globals;
 
-class WebviewScreen extends StatefulWidget {
-  const WebviewScreen({Key? key, required this.url}) : super(key: key);
+class WebViewScreen extends StatefulWidget {
+  const WebViewScreen({Key? key, required this.url}) : super(key: key);
 
   final String url;
 
   @override
-  State<WebviewScreen> createState() => _WebviewScreenState();
+  State<WebViewScreen> createState() => _WebViewScreenState();
 }
-class _WebviewScreenState extends State<WebviewScreen> {
 
-  late InAppWebViewController _webViewController;
+class _WebViewScreenState extends State<WebViewScreen> {
+  late InAppWebViewController webView;
+  late InAppWebView iaWebView;
+
+  showWarningDialog() async {
+    return await showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Are you sure'),
+            content: const Text('Are you sure you want to go back to the login screen?'),
+            actions: <Widget>[
+              TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: Theme.of(context).textTheme.labelLarge,
+                ),
+                child: const Text('Yes'),
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                  this.webView.goBack();
+                },
+              ),
+              TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: Theme.of(context).textTheme.labelLarge,
+                ),
+                child: const Text('Cancel'),
+                onPressed: () {
+                  Navigator.of(context).pop(false);
+                },
+              ),
+            ],
+          );
+        });
+  }
+
+  Future<bool> _goBack() async {
+    if (await webView.canGoBack()) {
+      Uri? url = await webView.getUrl();
+
+      List<String> listWhenCannotBack = [
+        this.widget.url + '/dashboard',
+        this.widget.url + '/whisper',
+        this.widget.url + '/quantum'
+      ];
+
+      if (listWhenCannotBack.contains(url.toString())) {
+        var canceled = await showWarningDialog();
+
+        if (canceled) {
+          await Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (BuildContext context) => EnterUsernameScreen()));
+
+          return Future.value(true);
+        }
+
+        return Future.value(false);
+      } else {
+        return Future.value(false);
+      }
+    } else {
+      var canceled = await showWarningDialog();
+      if (canceled) {
+        await Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (BuildContext context) => EnterUsernameScreen()));
+        return Future.value(true);
+      }
+
+      return Future.value(false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
         statusBarColor: HexColor('#ffffff'), // <-- SEE HERE
-        statusBarIconBrightness:
-        Brightness.dark, //<-- For Android SEE HERE (dark icons)
-        statusBarBrightness:
-        Brightness.light, //<-- For iOS SEE HERE (dark icons)
+        statusBarIconBrightness: Brightness.dark, //<-- For Android SEE HERE (dark icons)
+        statusBarBrightness: Brightness.light, //<-- For iOS SEE HERE (dark icons)
       ),
-      child: Scaffold(
-        body: Container(
-            child: Column(children: <Widget>[
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.only(top: 40),
+      child: WillPopScope(
+        onWillPop: () async {
+          return await _goBack();
+        },
+        child: Scaffold(
+          body: Container(
+              child: Column(children: <Widget>[
+            Expanded(
+              child: Container(
+                  padding: const EdgeInsets.only(top: 45),
                   child: InAppWebView(
                     initialUrlRequest: URLRequest(url: Uri.parse(widget.url)),
                     initialOptions: InAppWebViewGroupOptions(
                         crossPlatform: InAppWebViewOptions(
                           useShouldOverrideUrlLoading: true,
                         ),
-                        android: AndroidInAppWebViewOptions(supportMultipleWindows: true, thirdPartyCookiesEnabled: true, useHybridComposition: true),
-                        ios: IOSInAppWebViewOptions(
-
-                        )),
-                    onWebViewCreated: (InAppWebViewController controller) async{
-                      _webViewController = controller;
+                        android: AndroidInAppWebViewOptions(
+                            supportMultipleWindows: true, thirdPartyCookiesEnabled: true, useHybridComposition: true),
+                        ios: IOSInAppWebViewOptions()),
+                    onWebViewCreated: (InAppWebViewController controller) async {
+                      webView = controller;
                     },
                     onReceivedServerTrustAuthRequest: (controller, challenge) async {
                       print(challenge);
                       return ServerTrustAuthResponse(action: ServerTrustAuthResponseAction.PROCEED);
                     },
-                    shouldOverrideUrlLoading: (controller, navigationAction) async{
+                    shouldOverrideUrlLoading: (controller, navigationAction) async {
                       final uri = navigationAction.request.url;
-                      print('uri:' + uri.toString());
-                      if(uri.toString().startsWith(globals.deeplink)){
+
+                      hasLoaded = true;
+                      if (uri.toString().startsWith(AppConfig().deepLink())) {
                         _launchUrl(uri);
                         return NavigationActionPolicy.CANCEL;
                       }
                       return NavigationActionPolicy.ALLOW;
                     },
-                    onLoadError: (
-                        controller,
-                        url,
-                        int i,
-                        String s
-                        ) async {
+                    onLoadError: (controller, url, int i, String s) async {
                       print('CUSTOM_HANDLER: $i, $s, $url');
-                      /** instead of printing the console message i want to render a static page or display static message **/
-
                     },
                     onLoadStop: (controller, url) {},
-                  ),
-                ),
-              ),
-            ])),
+                  )),
+            ),
+          ])),
+        ),
       ),
     );
   }

@@ -33,16 +33,14 @@ switchConfigs() {
     cp android/app/src/main/AndroidManifest_$1 android/app/src/main/AndroidManifest.xml
     cp android/app/src/main/AndroidManifest_$1 android/app/src/debug/AndroidManifest.xml
     cp android/app/build_$1 android/app/build.gradle
-    cp lib/helpers/env_config_$1.template lib/helpers/env_config.dart
+    cp configs/env_config_$1.template lib/helpers/env_config.dart
     cp android/app/src/main/kotlin/com/example/app/MainActivity_$1 android/app/src/main/kotlin/com/example/app/MainActivity.kt
 
-    cp android/app/src/main/res/mipmap-hdpi/ic_launcher_$1.png android/app/src/main/res/mipmap-hdpi/ic_launcher.png
-    cp android/app/src/main/res/mipmap-mdpi/ic_launcher_$1.png android/app/src/main/res/mipmap-mdpi/ic_launcher.png
-    cp android/app/src/main/res/mipmap-xhdpi/ic_launcher_$1.png android/app/src/main/res/mipmap-xhdpi/ic_launcher.png
-    cp android/app/src/main/res/mipmap-xxhdpi/ic_launcher_$1.png android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png
-    cp android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_$1.png android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
-
-    cp lib/globals/globals_$1 lib/globals/globals.dart
+    cp android/app/src/main/res/mipmap-hdpi/ic_launcher.png android/app/src/main/res/mipmap-hdpi/ic_launcher.png
+    cp android/app/src/main/res/mipmap-mdpi/ic_launcher.png android/app/src/main/res/mipmap-mdpi/ic_launcher.png
+    cp android/app/src/main/res/mipmap-xhdpi/ic_launcher.png android/app/src/main/res/mipmap-xhdpi/ic_launcher.png
+    cp android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png
+    cp android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
 
     # cp android/app/google-services_$1 android/app/google-services.json
     # cp ios/Runner/GoogleService-Info_$1 ios/Runner/GoogleService-Info.plist
@@ -98,7 +96,7 @@ then
     LauncherImgPath4=android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png
     LauncherImgPath5=android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
 
-    generateFile $env_configFilePath lib/helpers/env_config_local.template
+    generateFile $env_configFilePath configs/env_config_local.template
     generateFile $AppConfigLocalFilePath lib/app_config_local.template
 
     generateFile $BuildGradlePath android/app/build_local

@@ -2,8 +2,6 @@ import 'package:freeflow/app_config_local.dart';
 import 'package:freeflow/helpers/env_config.dart';
 import 'package:freeflow/helpers/environment.dart';
 
-import 'helpers/globals.dart';
-
 class AppConfig extends EnvConfig {
   late AppConfigImpl appConfig;
 
@@ -19,164 +17,46 @@ class AppConfig extends EnvConfig {
     }
   }
 
-  String baseUrl() {
-    return appConfig.baseUrl();
+  String deepLink() {
+    return appConfig.deepLink();
   }
-
-  String openKycApiUrl() {
-    return appConfig.openKycApiUrl();
-  }
-
-  String threeBotApiUrl() {
-    return appConfig.threeBotApiUrl();
-  }
-
-  String threeBotFrontEndUrl() {
-    return appConfig.threeBotFrontEndUrl();
-  }
-
-  String threeBotSocketUrl() {
-    return appConfig.threeBotSocketUrl();
-  }
-
-  String wizardUrl() {
-    return appConfig.wizardUrl();
-  }
-
-  String pKidUrl() {
-    return appConfig.pKidUrl();
-  }
-
-  Map<String, String> flagSmithConfig() {
-    return appConfig.flagSmithConfig();
+  String freeFlowUrl() {
+    return appConfig.freeFlowUrl();
   }
 }
 
 abstract class AppConfigImpl {
-  String baseUrl();
-
-  String openKycApiUrl();
-
-  String threeBotApiUrl();
-
-  String threeBotFrontEndUrl();
-
-  String threeBotSocketUrl();
-
-  String wizardUrl();
-
-  String pKidUrl();
-
-  Map<String, String> flagSmithConfig();
+  String deepLink();
+  String freeFlowUrl();
 }
 
 class AppConfigProduction extends AppConfigImpl {
-  String baseUrl() {
-    return "login.threefold.me";
+  String deepLink() {
+    return "threebot://";
   }
 
-  String openKycApiUrl() {
-    return "https://openkyc.live";
+  String freeFlowUrl() {
+    return '.demo.freeflow.life';
   }
 
-  String threeBotApiUrl() {
-    return "https://login.threefold.me/api";
-  }
-
-  String threeBotFrontEndUrl() {
-    return "https://login.threefold.me/";
-  }
-
-  String threeBotSocketUrl() {
-    return "wss://login.threefold.me";
-  }
-
-  String wizardUrl() {
-    return 'https://wizard.jimber.org/';
-  }
-
-  String pKidUrl() {
-    return 'https://pkid.jimber.org/v1';
-  }
-
-  Map<String, String> flagSmithConfig() {
-    return {
-      'url': 'https://flagsmith.jimber.io/api/v1/',
-      'apiKey': 'BuzktmbcnMJ77vznU7WhJB'
-    };
-  }
 }
 
 class AppConfigStaging extends AppConfigImpl {
-  String baseUrl() {
-    return "login.staging.jimber.io";
+  String deepLink() {
+    return "threebot-staging://";
   }
 
-  String openKycApiUrl() {
-    return 'https://openkyc.staging.jimber.io';
-  }
-
-  String threeBotApiUrl() {
-    return "https://login.staging.jimber.io/api";
-  }
-
-  String threeBotFrontEndUrl() {
-    return "https://login.staging.jimber.io/";
-  }
-
-  String threeBotSocketUrl() {
-    return "wss://login.staging.jimber.io";
-  }
-
-  String wizardUrl() {
-    return 'https://wizard.staging.jimber.io/';
-  }
-
-  String pKidUrl() {
-    return 'https://pkid.staging.jimber.io/v1';
-  }
-
-  Map<String, String> flagSmithConfig() {
-    return {
-      'url': 'https://flagsmith.jimber.io/api/v1/',
-      'apiKey': 'n6YyxDdrePqwAF49KCYx7S'
-    };
+  String freeFlowUrl() {
+    return '.digitaltwin-test.jimbertesting.be';
   }
 }
 
 class AppConfigTesting extends AppConfigImpl {
-  String baseUrl() {
-    return "login.testing.jimber.org";
+  String deepLink() {
+    return "threebot-testing://g";
   }
 
-  String openKycApiUrl() {
-    return "https://openkyc.testing.jimber.org";
-  }
-
-  String threeBotApiUrl() {
-    return "https://login.testing.jimber.org/api";
-  }
-
-  String threeBotFrontEndUrl() {
-    return "https://login.testing.jimber.org/";
-  }
-
-  String threeBotSocketUrl() {
-    return "wss://login.testing.jimber.org";
-  }
-
-  String wizardUrl() {
-    return 'https://wizard.staging.jimber.org/';
-  }
-
-  String pKidUrl() {
-    return 'https://pkid.staging.jimber.io/v1';
-  }
-
-  Map<String, String> flagSmithConfig() {
-    return {
-      'url': 'https://flagsmith.jimber.io/api/v1/',
-      'apiKey': 'VtTsMwJwiF69QWFWHGEMKM'
-    };
+  String freeFlowUrl() {
+    return '.digitaltwin-test.jimbertesting.be';
   }
 }

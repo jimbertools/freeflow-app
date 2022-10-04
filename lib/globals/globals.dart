@@ -1,4 +1,3 @@
-library my_prj.globals;
+bool hasLoaded = false;
 
-String url = '.digitaltwin-test.jimbertesting.be';
-String deeplink = 'threebot-staging://';
+

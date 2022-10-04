@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:freeflow/app_config.dart';
+import 'package:freeflow/helpers/shared_preference_data.dart';
 import 'package:freeflow/screens/webview_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -7,20 +9,38 @@ import 'package:freeflow/models/user.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../globals/globals.dart';
 import '../helpers/hex_color.dart';
 
 import 'package:freeflow/globals/globals.dart' as globals;
 
-class UserScreen extends StatefulWidget {
-  _UserScreenState createState() => _UserScreenState();
+class EnterUsernameScreen extends StatefulWidget {
+  _EnterUsernameScreenState createState() => _EnterUsernameScreenState();
 }
 
-class _UserScreenState extends State<UserScreen> {
+class _EnterUsernameScreenState extends State<EnterUsernameScreen> with WidgetsBindingObserver {
   final TextEditingController usernameController = TextEditingController();
+
+  AppLifecycleState? _notification;
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    print(hasLoaded);
+    setState(() {
+      _notification = state;
+    });
+  }
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 
   User user = new User(username: '');
@@ -33,10 +53,8 @@ class _UserScreenState extends State<UserScreen> {
         appBar: AppBar(
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: HexColor('#dacfc7'), // <-- SEE HERE
-            statusBarIconBrightness:
-                Brightness.dark, //<-- For Android SEE HERE (dark icons)
-            statusBarBrightness:
-                Brightness.light, //<-- For iOS SEE HERE (dark icons)
+            statusBarIconBrightness: Brightness.dark, //<-- For Android SEE HERE (dark icons)
+            statusBarBrightness: Brightness.light, //<-- For iOS SEE HERE (dark icons)
           ),
           centerTitle: true,
           iconTheme: IconThemeData(
@@ -69,22 +87,19 @@ class _UserScreenState extends State<UserScreen> {
                           Text(
                             "WELCOME TO YOUR",
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 14,
                               color: HexColor('#2c3e50'),
                               fontWeight: FontWeight.normal,
                             ),
                           ),
                           Text(
                             "FREEFLOW EXPERIENCE",
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: HexColor('#2c3e50'),
-                                fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 22, color: HexColor('#2c3e50'), fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(height: 15),
-                          Text(
-                              "Please enter your ThreeFold Connect username in order to continue.",
+                          SizedBox(height: 30),
+                          Text("Please enter your ThreeFold Connect username in order to continue.",
                               style: TextStyle(
+                                fontWeight: FontWeight.w300,
                                 color: HexColor('#2c3e50'),
                               ),
                               textAlign: TextAlign.center),
@@ -101,40 +116,45 @@ class _UserScreenState extends State<UserScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 TextFormField(
+                                  style: TextStyle(color: HexColor('#2c3e50')),
                                   controller: usernameController,
                                   decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    isDense: true, // Added this
+                                    hintText: 'Enter your username',
+                                    hintStyle: TextStyle(fontWeight: FontWeight.w200),
+                                    border: InputBorder.none,
+                                    isDense: true,
+                                    // Added this
                                     contentPadding: EdgeInsets.all(12),
                                     filled: true,
                                     fillColor: Color.fromRGBO(227, 219, 213, 1),
                                   ),
-                                  style: TextStyle(),
                                 ),
                                 TextButton(
                                   onPressed: () async {
-                                    user.username = usernameController.text;
+                                    if(usernameController.text.length == 0) {
+                                      return;
+                                    }
+
+                                    user.username = usernameController.text.trim();
+
+                                    await setNameInStorage(user.username);
+
                                     print(user.username);
+                                    print('https://' + user.username + AppConfig().freeFlowUrl());
+
+
                                     await Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => WebviewScreen(
-                                                url: 'https://' +
-                                                    user.username +
-                                                    globals.url)));
+                                            builder: (context) => WebViewScreen(
+                                                url: 'https://' + user.username + AppConfig().freeFlowUrl())));
                                   },
                                   style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                        HexColor('#66c9bf')),
-                                    padding:
-                                        MaterialStateProperty.all<EdgeInsets>(
-                                            EdgeInsets.only(top: 5, bottom: 5)),
-                                    minimumSize:
-                                        MaterialStateProperty.all<Size>(
-                                            Size(300, 34.0)),
+                                    backgroundColor: MaterialStateProperty.all(HexColor('#66c9bf')),
+                                    padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.only(top: 5, bottom: 5)),
+                                    minimumSize: MaterialStateProperty.all<Size>(Size(300, 34.0)),
                                   ),
-                                  child: const Text('GO!',
-                                      style: TextStyle(color: Colors.white)),
+                                  child: const Text('GO!', style: TextStyle(color: Colors.white)),
                                 ),
                               ],
                             ),

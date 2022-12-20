@@ -1,4 +1,4 @@
-package org.freeflow.staging
+package org.freeflow.app
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine

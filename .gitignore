@@ -94,8 +94,8 @@ build/
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 
-android/app-key\.keystore
-android/app/app-key.keystore
+android/app/key.jks
+android/key.jks
 
 android/key\.properties
 
@@ -107,6 +107,9 @@ android/app/src/main/AndroidManifest.xml
 lib/helpers/env_config.dart
 *.dart-e
 *.DS_Store
+
+lib/firebase_options.dart
+android/app/google-services.json
 
 android/app/build.gradle
 android/app/src/main/java/org/jimber/threebotlogin/MainActivity.java

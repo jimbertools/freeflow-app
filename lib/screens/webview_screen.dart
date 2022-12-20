@@ -76,6 +76,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
 
         return Future.value(false);
       } else {
+        await webView.goBack();
         return Future.value(false);
       }
     } else {

@@ -43,7 +43,7 @@ class AppConfigProduction extends AppConfigImpl {
 
 class AppConfigStaging extends AppConfigImpl {
   String deepLink() {
-    return "threebot-staging://";
+    return "threebot://";
   }
 
   String freeFlowUrl() {

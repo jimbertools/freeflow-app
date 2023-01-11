@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:freeflow/app_config.dart';
 import 'package:freeflow/helpers/shared_preference_data.dart';
 import 'package:freeflow/screens/webview_screen.dart';
@@ -9,10 +10,7 @@ import 'package:freeflow/models/user.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../globals/globals.dart';
 import '../helpers/hex_color.dart';
-
-import 'package:freeflow/globals/globals.dart' as globals;
 
 class EnterUsernameScreen extends StatefulWidget {
   _EnterUsernameScreenState createState() => _EnterUsernameScreenState();
@@ -21,14 +19,19 @@ class EnterUsernameScreen extends StatefulWidget {
 class _EnterUsernameScreenState extends State<EnterUsernameScreen> with WidgetsBindingObserver {
   final TextEditingController usernameController = TextEditingController();
 
-  AppLifecycleState? _notification;
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    print(hasLoaded);
-    setState(() {
-      _notification = state;
+  _EnterUsernameScreenState() {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print('Handling a foreground message: ${message.messageId}');
+      print('Message data: ${message.data}');
+      print('Message notification: ${message.notification?.title}');
+      print('Message notification: ${message.notification?.body}');
     });
+
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  }
+
+  Future _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+    print("Handling a background message: ${message.messageId}");
   }
 
   @override
@@ -92,6 +95,14 @@ class _EnterUsernameScreenState extends State<EnterUsernameScreen> with WidgetsB
                               fontWeight: FontWeight.normal,
                             ),
                           ),
+                          ElevatedButton(
+                              onPressed: () async {
+                                final fcmToken = await FirebaseMessaging.instance.getToken();
+                                print(fcmToken);
+
+                                print(fcmToken);
+                              },
+                              child: Text('hi')),
                           Text(
                             "FREEFLOW EXPERIENCE",
                             style: TextStyle(fontSize: 22, color: HexColor('#2c3e50'), fontWeight: FontWeight.bold),
@@ -131,7 +142,7 @@ class _EnterUsernameScreenState extends State<EnterUsernameScreen> with WidgetsB
                                 ),
                                 TextButton(
                                   onPressed: () async {
-                                    if(usernameController.text.length == 0) {
+                                    if (usernameController.text.length == 0) {
                                       return;
                                     }
 
@@ -139,9 +150,7 @@ class _EnterUsernameScreenState extends State<EnterUsernameScreen> with WidgetsB
 
                                     await setNameInStorage(user.username);
 
-                                    print(user.username);
                                     print('https://' + user.username + AppConfig().freeFlowUrl());
-
 
                                     await Navigator.push(
                                         context,

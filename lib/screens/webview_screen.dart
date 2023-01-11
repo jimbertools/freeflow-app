@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:freeflow/app_config.dart';
+import 'package:freeflow/helpers/shared_preference_data.dart';
 import 'package:freeflow/screens/enter_username_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -120,9 +122,12 @@ class _WebViewScreenState extends State<WebViewScreen> {
                         ios: IOSInAppWebViewOptions()),
                     onWebViewCreated: (InAppWebViewController controller) async {
                       webView = controller;
+                      addWebViewHandlers();
+                    },
+                    onConsoleMessage: (InAppWebViewController controller, ConsoleMessage consoleMessage) {
+                      print("FreeFlow console: " + consoleMessage.message);
                     },
                     onReceivedServerTrustAuthRequest: (controller, challenge) async {
-                      print(challenge);
                       return ServerTrustAuthResponse(action: ServerTrustAuthResponseAction.PROCEED);
                     },
                     shouldOverrideUrlLoading: (controller, navigationAction) async {
@@ -145,6 +150,22 @@ class _WebViewScreenState extends State<WebViewScreen> {
         ),
       ),
     );
+  }
+
+  addWebViewHandlers() {
+    webView.addJavaScriptHandler(handlerName: "VUE_INITIALIZED", callback: initializedHandler);
+    webView.addJavaScriptHandler(handlerName: "RETRIEVE_IDENTIFIER", callback: retrieveIdentifier);
+    print('Added handlers');
+  }
+
+  Future<void> initializedHandler(List<dynamic> params) async {
+    print('RECEIVED VUE_INITIALIZED');
+  }
+
+  Future<String> retrieveIdentifier(List<dynamic> params) async {
+    print('RECEIVED RETRIEVE_IDENTIFIER');
+    print(await getIdentifierInStorage());
+    return await getIdentifierInStorage();
   }
 
   Future<void> _launchUrl(url) async {
